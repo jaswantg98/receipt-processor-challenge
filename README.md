@@ -12,8 +12,6 @@ This project implements a receipt processing service that awards points based on
 - [API Endpoints](#api-endpoints)
   - [Process Receipt](#process-receipt)
   - [Get Points](#get-points)
-- [Testing](#testing)
-- [License](#license)
 
 ## Requirements
 - **Java 11** or higher
