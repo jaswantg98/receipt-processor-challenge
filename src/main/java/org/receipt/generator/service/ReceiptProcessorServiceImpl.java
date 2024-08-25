@@ -24,7 +24,6 @@ public class ReceiptProcessorServiceImpl implements ReceiptProcessorService {
     @Autowired
     ReceiptProcessorInMemoryStore receiptProcessorInMemoryStore;
 
-
     @Override
     public ReceiptProcessorResponse processReceipts(ReceiptRequest receiptRequest) {
         ReceiptProcessorResponse response = new ReceiptProcessorResponse();

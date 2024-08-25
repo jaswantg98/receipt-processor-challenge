@@ -1,6 +1,8 @@
 package org.receipt.generator.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.receipt.generator.exception.InvalidReceiptRequestException;
+import org.receipt.generator.exception.InvalidUUIDException;
 import org.receipt.generator.model.ReceiptPointsResponse;
 import org.receipt.generator.model.ReceiptProcessorResponse;
 import org.receipt.generator.model.ReceiptRequest;
@@ -27,12 +29,29 @@ public class ReceiptGeneratorController {
 
     @PostMapping("/process")
     public ResponseEntity<ReceiptProcessorResponse> processReceipts(@RequestBody String receiptRequestJson) {
-        ReceiptRequest receiptRequest = JsonToReceiptRequest.fromJson(receiptRequestJson);
-        return ResponseEntity.status(HttpStatus.CREATED).body(receiptProcessorService.processReceipts(receiptRequest));
+        try {
+            var receiptRequest = JsonToReceiptRequest.fromJson(receiptRequestJson);
+            return ResponseEntity.status(HttpStatus.CREATED).body(receiptProcessorService.processReceipts(receiptRequest));
+        } catch (InvalidReceiptRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ReceiptProcessorResponse());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ReceiptProcessorResponse());
+        }
     }
 
     @GetMapping("/{id}/points")
     public ResponseEntity<ReceiptPointsResponse> getPoints(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(receiptProcessorService.getPoints(id));
+        if (id == null) {
+            throw new InvalidUUIDException("The provided ID is null.");
+        }
+
+        ReceiptPointsResponse response = receiptProcessorService.getPoints(id);
+
+        if (response == null) {
+            throw new InvalidUUIDException("The provided ID is invalid or not found.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }
