@@ -103,6 +103,9 @@ Once the application is running, you can access the API at `http://localhost:808
 - **Response**: JSON object with the points awarded for the given receipt ID
 
 #### Example Response
+```json
 {
     "points": 109
 }
+```
+
