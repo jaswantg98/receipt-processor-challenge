@@ -66,6 +66,7 @@ Once the application is running, you can access the API at `http://localhost:808
 - **Response**: JSON object with the ID of the processed receipt
 
 #### Example Request
+```json
 {
   "retailer": "M&M Corner Market",
   "purchaseDate": "2022-03-20",
@@ -89,6 +90,7 @@ Once the application is running, you can access the API at `http://localhost:808
 }
 
 #### Example Response
+```json
 {
     "id": "383c8d0e-3deb-4cf8-afbf-7d2877a8b6fb"
 }
