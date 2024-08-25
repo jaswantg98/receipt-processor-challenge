@@ -14,9 +14,9 @@ This project implements a receipt processing service that awards points based on
   - [Get Points](#get-points)
 
 ## Requirements
-- **Java 11** or higher
-- **Maven** (for dependency management)
-- **Docker** (optional, for containerized deployment)
+- **Java 17** (optional, if using Docker
+- **Maven** (optional, if using Docker)
+- **Docker** (for containerized deployment)
 
 ## Installation
 
@@ -41,6 +41,14 @@ This project implements a receipt processing service that awards points based on
 2. Run the Docker container:
     ```bash
     docker run -p 8080:8080 receipt-processor-challenge
+    ```
+3. Stop the Docker container:
+    ```bash
+    docker ps
+    ```
+    Copy the ID of the docker container.
+    ```bash
+    docker stop <CONTAINER ID>
     ```
 
 ## Usage
